@@ -60,7 +60,7 @@ $app->get('/groups', function (Request $request, Response $response) {
     } catch (Exception $e) {
         // Handle exceptions and return an error response if needed
         $responseData = ['error' => $e->getMessage()];
-
+        $response = $response->withHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin (*)
         $response = $response->withHeader('Content-Type', 'application/json');
         $response->getBody()->write(json_encode($responseData));
         return $response->withStatus(500);

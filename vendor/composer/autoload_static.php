@@ -45,10 +45,6 @@ class ComposerStaticInit6a0417d4f3a6e3e2cb3028cc7cec5ed5
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
-        'M' => 
-        array (
-            'MyApp\\' => 6,
-        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -136,16 +132,12 @@ class ComposerStaticInit6a0417d4f3a6e3e2cb3028cc7cec5ed5
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'MyApp\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/config',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

@@ -11,8 +11,16 @@ $app = AppFactory::create();
 
 
 $app->get('/', function (Request $request, Response $response, $args) {
-  
-   return "" ;
+
+   if (in_array('sqlite3', PDO::getAvailableDrivers())) {
+      echo 'SQLite PDO driver is available.';
+  } else {
+      echo 'SQLite PDO driver is not available.';
+  }
+   $response = $response->withHeader('Content-Type', 'application/json');
+   $response = $response->withHeader('Access-Control-Allow-Origin', '*'); 
+   $response->getBody()->write(json_encode("Hello World"));
+   return $response;
 });
 
 require __DIR__ . '/../routes/create_tables.php';

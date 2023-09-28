@@ -223,6 +223,10 @@
         height: 400px;
         overflow-x: auto
     }
+    .form-row {
+            display: inline-block;
+            margin-right: 10px; 
+        }
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 465px;
@@ -243,7 +247,8 @@
     }
     .chat-app .chat-history {
         height: 300px;
-        overflow-x: auto
+        overflow-x: auto;
+        padding-top: 10px; 
     }
 }
 
@@ -298,12 +303,7 @@
     <h6 class="m-b-0" id="group-name"></h6>
 </div>
 </div>
-<div class="col-lg-6 hidden-sm text-right">
-<a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-<a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-<a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-<a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-</div>
+
 </div>
 </div>
 <div class="chat-history"id="chatHistory">
@@ -321,6 +321,19 @@
         </div>
     </div>
 </div>
+<h2>Enter Number and Username</h2>
+<form id="user-form">
+    <div class="form-row">
+        <label for="number">Number:</label>
+        <input type="tel" id="number" name="number" >
+
+    </div>
+    <div class="form-row">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <input type="submit" value="Submit">
+</form>
 </div>
 </div>
 </div>
@@ -330,7 +343,32 @@
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-// Define the URL
+number_user="12"
+ document.getElementById('user-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            number_user = formData.get('number');
+            // Send a POST request to the /create-user endpoint
+            fetch('http://localhost:8888/create-user', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                if (data.message) {
+                    alert(data.message); // User created successfully
+                } else if (data.error) {
+                    alert(data.error);   // Failed to create user
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while creating the user.');
+            });
+        });
 conn=""
 const apiUrl = 'http://localhost:8888/groups';
 
@@ -493,7 +531,7 @@ const sendMessageButton = document.getElementById('sendMessageButton');
 sendMessageButton.addEventListener('click', function() {
     const message = {
     group_id: selected_group.group_id.toString(),
-    number: "531",
+    number: number_user.toString(),
     message: messageInput.value
 };
 
@@ -506,7 +544,7 @@ conn.send(messageJSON);
     // Clear the input field after sending the message (optional)
 
 // console.log(messageJSON.message)
-send_message("531", messageInput.value);
+send_message(number_user.toString(), messageInput.value);
 messageInput.value = '';
 });
 
