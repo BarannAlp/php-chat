@@ -21,7 +21,7 @@ The groups are public, allowing any user to join any group. Users are identified
 
 1. run "composer install"
 2. php -S localhost:8888 to run the application
-3. php server.dp for running the websocket for real-time messaging
+3. php server.php for running the websocket for real-time messaging
 
 you can use test.html for simple interface to test real-time messaging by opening two different chrome pages.
 you can create user and save to database by filling the form or it wil use the default number and username.
